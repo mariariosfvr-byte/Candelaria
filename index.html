@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Descubre las historias, artistas y expresiones de arte urbano de La Candelaria, Bogotá.">
+<title>La Candelaria — Historias que viven en sus muros</title>
+<style>
+:root{
+  --ink:#172a3a;--paper:#f1e9dc;--paper2:#fffaf1;--coral:#ed624d;
+  --yellow:#f4bd45;--teal:#398e80;--blue:#287da5;--pink:#e98ba0;
+  --muted:#64717a;--line:rgba(23,42,58,.16);--shadow:0 18px 45px rgba(23,42,58,.13);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.container{width:min(1180px,calc(100% - 44px));margin:auto}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(241,233,220,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:-.06em;font-size:1.15rem}
+.brand-mark{width:36px;height:36px;border-radius:50% 50% 45% 12%;background:var(--coral);display:grid;place-items:center;color:white;transform:rotate(-8deg);font-size:1.2rem}
+.nav-links{display:flex;align-items:center;gap:28px;font-size:.88rem;font-weight:700}
+.nav-links a{opacity:.78}.nav-links a:hover{opacity:1;color:var(--coral)}
+.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:13px 20px;background:var(--ink);color:white;font-weight:800;cursor:pointer;transition:.2s}
+.nav-cta:hover,.button:hover{transform:translateY(-2px);box-shadow:0 8px 20px #172a3a30}
+.menu-toggle{display:none;background:none;border:0;font-size:1.6rem;color:var(--ink)}
+.hero{position:relative;overflow:hidden;padding:50px 0 70px;min-height:650px;display:flex;align-items:center}
+.hero:before{content:"";position:absolute;inset:0;background:
+linear-gradient(90deg,rgba(23,42,58,.82),rgba(23,42,58,.35) 58%,rgba(23,42,58,.12)),
+url('https://images.trvl-media.com/place/6053685/14be17e0-ae68-4b77-865a-4fea5e16eec5.jpg') center/cover}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 82% 15%,transparent 0 18%,rgba(23,42,58,.12) 19% 20%,transparent 21%),linear-gradient(130deg,transparent 70%,rgba(237,98,77,.35) 70% 73%,transparent 73%)}
+.hero-inner{position:relative;z-index:1;color:white;max-width:760px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 13px;border:1px solid #ffffff75;border-radius:999px;background:#ffffff18;font-size:.75rem;text-transform:uppercase;letter-spacing:.14em;font-weight:850}
+.eyebrow i{width:8px;height:8px;background:var(--yellow);border-radius:50%}
+h1{font-size:clamp(3.4rem,8vw,7.6rem);line-height:.88;letter-spacing:-.085em;margin:28px 0 18px;font-weight:950;max-width:850px}
+h1 span{color:var(--yellow);font-family:Georgia,serif;font-style:italic;font-weight:500;letter-spacing:-.07em}
+.hero-copy{font-size:clamp(1rem,1.6vw,1.22rem);line-height:1.65;max-width:570px;color:#f8f1e8}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.button.yellow{background:var(--yellow);color:var(--ink)}
+.button.ghost{background:transparent;border:1px solid #ffffff99}
+.hero-note{position:absolute;right:4%;bottom:55px;z-index:2;transform:rotate(5deg);background:var(--paper2);color:var(--ink);padding:17px 20px;box-shadow:var(--shadow);font-family:Georgia,serif;font-style:italic;font-size:1.1rem}
+.hero-note:before{content:"";position:absolute;top:-9px;left:35%;width:45px;height:18px;background:#f4bd45b8;transform:rotate(-8deg)}
+.ticker{background:var(--coral);color:#fff;padding:13px 0;overflow:hidden;white-space:nowrap;font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:.82rem}
+.ticker span{display:inline-block;padding-left:35px}
+.section{padding:92px 0}
+.section-kicker{font-size:.75rem;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:var(--coral)}
+.section-title{font-size:clamp(2.4rem,5vw,4.4rem);line-height:.98;letter-spacing:-.07em;margin:14px 0 18px;font-weight:950}
+.section-intro{max-width:640px;color:var(--muted);font-size:1.05rem;line-height:1.7}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:42px}
+.paper-card{background:var(--paper2);padding:30px;border-radius:5px 22px 8px 22px;box-shadow:var(--shadow);position:relative}
+.paper-card:nth-child(2){transform:rotate(1.2deg);background:#f8d9c9}
+.paper-card h3{font-size:1.45rem;letter-spacing:-.04em;margin:0 0 12px}
+.paper-card p{line-height:1.7;color:#485762;margin:0}
+.card-number{font-weight:950;color:var(--coral);font-size:2.8rem;letter-spacing:-.08em;line-height:1}
+.card-icon{position:absolute;right:24px;top:22px;font-size:2rem}
+.split{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+.photo-stack{position:relative;min-height:480px}
+.photo-main{position:absolute;inset:0 12% 8% 0;border:10px solid var(--paper2);box-shadow:var(--shadow);background:url('https://www.idt.gov.co/sites/default/files/2025-10/5_candelaria33_ricardob_ez_kcukzw-%281%29-%281%29.jpg') center/cover;transform:rotate(-3deg)}
+.photo-small{position:absolute;width:48%;height:44%;right:0;bottom:0;border:8px solid var(--paper2);box-shadow:var(--shadow);background:url('https://pueblosoriginarios.com/sur/andina/candelaria/imagenes/candelaria3.jpg') center/cover;transform:rotate(5deg)}
+.sticker{position:absolute;top:25px;right:0;background:var(--yellow);border-radius:50%;width:112px;height:112px;display:grid;place-items:center;text-align:center;font-weight:950;font-size:.85rem;transform:rotate(12deg);padding:12px}
+.pill-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:24px}
+.pill{border:1px solid var(--line);padding:9px 13px;border-radius:999px;font-size:.8rem;font-weight:800;background:#fff8}
+.pill:nth-child(2){background:#f5d16e}.pill:nth-child(3){background:#c8e1d8}
+.method{background:var(--ink);color:white;position:relative;overflow:hidden}
+.method:after{content:"";position:absolute;width:380px;height:380px;border:1px solid #ffffff18;border-radius:50%;right:-120px;top:-140px;box-shadow:0 0 0 35px #ffffff08,0 0 0 75px #ffffff06}
+.method .section-intro{color:#c4d0d5}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:46px;position:relative;z-index:1}
+.step{border-top:3px solid var(--yellow);padding:18px 14px 16px;background:#ffffff0b;min-height:190px}
+.step b{font-size:2.2rem;color:var(--yellow);letter-spacing:-.08em}
+.step h3{margin:12px 0 8px;font-size:1rem}
+.step p{font-size:.85rem;line-height:1.55;color:#c4d0d5;margin:0}
+.ai-note{margin-top:24px;padding:18px 22px;border:1px dashed #ffffff70;border-radius:12px;max-width:760px;color:#e7edf0;line-height:1.6}
+.ai-note strong{color:var(--yellow)}
+.audience-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.audience{padding:23px 20px;background:var(--paper2);border-bottom:5px solid var(--teal);box-shadow:0 10px 24px #172a3a0d}
+.audience:nth-child(2){border-color:var(--coral)}.audience:nth-child(3){border-color:var(--yellow)}.audience:nth-child(4){border-color:var(--blue)}
+.audience .emoji{font-size:2rem}.audience h3{font-size:1.05rem;margin:14px 0 8px}.audience p{font-size:.88rem;color:var(--muted);line-height:1.55;margin:0}
+.solution{background:#e5d9c9}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:38px}
+.feature{background:var(--paper2);padding:25px;border-radius:4px 18px 4px 18px;min-height:180px}
+.feature .symbol{font-size:1.8rem;color:var(--coral)}
+.feature h3{margin:12px 0 7px;font-size:1.12rem}.feature p{margin:0;color:var(--muted);line-height:1.6;font-size:.9rem}
+.demo{margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center;background:var(--ink);color:white;padding:34px;border-radius:8px 28px 8px 28px}
+.demo p{color:#c4d0d5;line-height:1.65}
+.chatbox{background:#f8f3e9;color:var(--ink);border-radius:16px;padding:18px}
+.chat-head{display:flex;align-items:center;gap:10px;padding-bottom:13px;border-bottom:1px solid var(--line);font-weight:900}
+.bot-dot{width:34px;height:34px;border-radius:50%;background:var(--teal);display:grid;place-items:center;color:white}
+.chat-message{background:white;padding:13px;border-radius:12px;margin:14px 0;font-size:.9rem;line-height:1.5}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{border:1px solid #172a3a30;background:transparent;border-radius:999px;padding:8px 10px;font-size:.76rem;cursor:pointer}
+.chip:hover{background:var(--yellow)}
+.chat-answer{font-size:.84rem;line-height:1.5;margin-top:12px;color:#36515e;min-height:38px}
+.impact{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-top:38px}
+.impact-item{text-align:center;padding:22px 12px}
+.impact-icon{margin:auto;width:65px;height:65px;border-radius:50%;display:grid;place-items:center;background:var(--yellow);font-size:1.7rem}
+.impact-item:nth-child(2) .impact-icon{background:#f2b8b4}.impact-item:nth-child(3) .impact-icon{background:#b9d8cd}.impact-item:nth-child(4) .impact-icon{background:#b8d7e6}
+.impact-item h3{font-size:1rem;margin:14px 0 6px}.impact-item p{font-size:.85rem;color:var(--muted);line-height:1.5;margin:0}
+.final-cta{background:var(--coral);color:white;padding:66px 0;position:relative;overflow:hidden}
+.final-cta:after{content:"✳";position:absolute;right:8%;top:-65px;font-size:18rem;color:#ffffff20;line-height:1}
+.final-inner{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:25px}
+.final-cta h2{font-size:clamp(2.3rem,5vw,4rem);letter-spacing:-.07em;line-height:.95;margin:0 0 12px}
+.final-cta p{margin:0;color:#ffe7df}
+.final-cta .button{background:var(--paper2);color:var(--ink);white-space:nowrap}
+footer{background:var(--ink);color:#d8e0e3;padding:30px 0}
+.footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:.82rem}
+.footer-inner strong{color:white}
+.small{font-size:.75rem;color:#aab9c0}
+@media(max-width:900px){
+ .nav-links{gap:15px}.steps{grid-template-columns:repeat(3,1fr)}.audience-grid{grid-template-columns:repeat(2,1fr)}
+ .features{grid-template-columns:repeat(2,1fr)}.split{gap:35px}
+}
+@media(max-width:650px){
+ .container{width:min(100% - 30px,560px)}
+ .nav{height:66px}.menu-toggle{display:block}.nav-cta{display:none}
+ .nav-links{display:none;position:absolute;top:66px;left:0;right:0;background:var(--paper2);padding:18px 24px 24px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}
+ .nav-links.open{display:flex}
+ .hero{min-height:650px;padding:55px 0}.hero:before{background:linear-gradient(90deg,rgba(23,42,58,.85),rgba(23,42,58,.42)),url('https://images.unsplash.com/photo-1569959220744-ff553533f492?auto=format&fit=crop&w=1000&q=85') center/cover}
+ h1{font-size:clamp(3.2rem,16vw,5rem)}.hero-note{right:8%;bottom:20px;font-size:.9rem}
+ .section{padding:68px 0}.problem-grid,.split,.demo{grid-template-columns:1fr}
+ .photo-stack{min-height:360px;order:2}.steps{grid-template-columns:1fr 1fr}.step{min-height:170px}
+ .audience-grid,.features{grid-template-columns:1fr 1fr}.impact{grid-template-columns:1fr 1fr}
+ .final-inner{align-items:flex-start;flex-direction:column}.footer-inner{align-items:flex-start;flex-direction:column}
+}
+@media(max-width:420px){.steps,.audience-grid,.features{grid-template-columns:1fr}.hero-actions .button{width:100%}.paper-card{padding:23px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="#inicio" aria-label="La Candelaria, inicio"><span class="brand-mark">✳</span> LA CANDELARIA</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#historia">El proyecto</a><a href="#metodo">Metodología</a><a href="#explora">Explora</a><a href="#impacto">Impacto</a>
+    </nav>
+    <a class="nav-cta" href="#explora">Descubrir historias ↗</a>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-inner">
+    <div class="eyebrow"><i></i> Arte urbano · Memoria · Tecnología</div>
+    <h1>LA CANDELARIA<br><span>habla en sus muros.</span></h1>
+    <p class="hero-copy">Cada mural guarda una voz, una memoria y una forma de ver la ciudad. Explora el arte urbano de La Candelaria y descubre las historias que merecen ser contadas.</p>
+    <div class="hero-actions">
+      <a class="button yellow" href="#explora">Explorar el proyecto ↗</a>
+      <a class="button ghost" href="#historia">Conoce la iniciativa</a>
+    </div>
+  </div>
+  <div class="hero-note">Bogotá se lee<br>también en sus muros.</div>
+</section>
+
+<div class="ticker"><span>✳ Cada muro cuenta una historia</span><span>✳ El arte construye memoria</span><span>✳ Descubre · Comprende · Conecta</span></div>
+
+<section class="section" id="historia">
+ <div class="container">
+  <div class="section-kicker">01 / La necesidad</div>
+  <div class="split">
+   <div>
+    <h2 class="section-title">Mirar no siempre es conocer.</h2>
+    <p class="section-intro">La Candelaria reúne expresiones artísticas que hablan de identidad, memoria y vida colectiva. Sin embargo, quienes recorren sus calles no siempre encuentran información clara sobre las obras, sus autores o los contextos que les dan sentido.</p>
+    <div class="pill-row"><span class="pill">Información dispersa</span><span class="pill">Autoría poco visible</span><span class="pill">Historias por descubrir</span></div>
+   </div>
+   <div class="photo-stack" aria-label="Composición visual de arte y ciudad">
+    <div class="photo-main"></div><div class="photo-small"></div><div class="sticker">ARTE<br>QUE<br>CUENTA</div>
+   </div>
+  </div>
+  <div class="problem-grid">
+   <article class="paper-card"><span class="card-number">01</span><span class="card-icon">◎</span><h3>La necesidad</h3><p>Facilitar el acceso a información confiable sobre el contexto, la historia y la autoría de las expresiones de arte urbano.</p></article>
+   <article class="paper-card"><span class="card-number">02</span><span class="card-icon">✳</span><h3>La oportunidad</h3><p>Conectar cultura y tecnología para transformar un paseo por el barrio en una experiencia de descubrimiento y aprendizaje.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="section method" id="metodo">
+ <div class="container">
+  <div class="section-kicker" style="color:var(--yellow)">02 / Cómo lo construiremos</div>
+  <h2 class="section-title">Primero las personas.<br>Luego la tecnología.</h2>
+  <p class="section-intro">Design Thinking guiará el proceso: comprender a quienes viven y recorren el territorio, definir necesidades y probar soluciones con participación humana.</p>
+  <div class="steps">
+   <article class="step"><b>01</b><h3>Empatizar</h3><p>Escuchar a visitantes, habitantes y artistas. IA: organizar entrevistas y detectar temas recurrentes.</p></article>
+   <article class="step"><b>02</b><h3>Definir</h3><p>Precisar barreras de acceso a la información. IA: apoyar la clasificación de hallazgos.</p></article>
+   <article class="step"><b>03</b><h3>Idear</h3><p>Proponer formas de explorar y comprender las obras. IA: ampliar alternativas de interacción.</p></article>
+   <article class="step"><b>04</b><h3>Prototipar</h3><p>Diseñar mapa, fichas y asistente cultural. IA: probar reconocimiento y conversación.</p></article>
+   <article class="step"><b>05</b><h3>Evaluar</h3><p>Validar con usuarios y artistas. IA: sintetizar comentarios para iterar.</p></article>
+  </div>
+  <div class="ai-note"><strong>IA con criterio:</strong> la tecnología ayuda a encontrar y organizar información; las fuentes, la autoría y las interpretaciones deben verificarse con personas y, cuando sea posible, con los propios artistas.</div>
+ </div>
+</section>
+
+<section class="section" id="explora">
+ <div class="container">
+  <div class="section-kicker">03 / Para quién</div>
+  <h2 class="section-title">Una ciudad, muchas miradas.</h2>
+  <p class="section-intro">La experiencia está pensada para quienes quieren conocer La Candelaria más allá de sus fachadas: entender sus expresiones, reconocer a sus creadores y conectar con el territorio.</p>
+  <div class="audience-grid">
+   <article class="audience"><div class="emoji">🧭</div><h3>Turistas</h3><p>Descubrir historias locales y recorrer el barrio con información contextual.</p></article>
+   <article class="audience"><div class="emoji">🏘️</div><h3>Habitantes</h3><p>Reconocer y compartir el valor cultural de su entorno cotidiano.</p></article>
+   <article class="audience"><div class="emoji">🎨</div><h3>Artistas</h3><p>Visibilizar sus obras, trayectorias y relatos desde la autoría.</p></article>
+   <article class="audience"><div class="emoji">📚</div><h3>Guías y estudiantes</h3><p>Consultar recursos para aprender y enriquecer recorridos culturales.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="section solution" id="solucion">
+ <div class="container">
+  <div class="section-kicker">04 / La propuesta</div>
+  <h2 class="section-title">Del muro a la historia.</h2>
+  <p class="section-intro">Una plataforma digital que reúne información cultural y herramientas interactivas para descubrir el arte urbano de La Candelaria.</p>
+  <div class="features">
+   <article class="feature"><div class="symbol">⌖</div><h3>Mapa interactivo</h3><p>Ubicar obras documentadas y explorar puntos de interés cultural.</p></article>
+   <article class="feature"><div class="symbol">▤</div><h3>Fichas culturales</h3><p>Consultar autoría, técnica, contexto y fuentes de cada obra registrada.</p></article>
+   <article class="feature"><div class="symbol">◉</div><h3>Reconocimiento visual</h3><p>Identificar obras previamente documentadas a partir de una fotografía.</p></article>
+   <article class="feature"><div class="symbol">✳</div><h3>Asistente cultural</h3><p>Resolver preguntas con información verificada y referencias consultables.</p></article>
+   <article class="feature"><div class="symbol">⌁</div><h3>Recorridos</h3><p>Descubrir rutas según intereses, tiempo disponible y ubicación.</p></article>
+   <article class="feature"><div class="symbol">▣</div><h3>Archivo de memoria</h3><p>Documentar obras y relatos para contribuir a su preservación cultural.</p></article>
+  </div>
+  <div class="demo">
+   <div><div class="section-kicker" style="color:var(--yellow)">Una experiencia por descubrir</div><h2 class="section-title" style="font-size:clamp(2rem,4vw,3.2rem)">Preguntar también es explorar.</h2><p>Imagina consultar a un asistente cultural sobre una obra. Sus respuestas deberán apoyarse en fuentes documentadas y distinguir los datos verificados de las interpretaciones.</p></div>
+   <div class="chatbox">
+    <div class="chat-head"><span class="bot-dot">✳</span> Guía cultural · Demo conceptual</div>
+    <div class="chat-message">¡Hola! Puedo ayudarte a explorar el arte urbano de La Candelaria. ¿Qué te gustaría descubrir?</div>
+    <div class="chips">
+     <button class="chip" data-answer="Podemos consultar el archivo de obras documentadas para conocer sus autores, ubicación y contexto.">¿Quién creó esta obra?</button>
+     <button class="chip" data-answer="Podemos construir un recorrido con obras registradas y fuentes verificadas.">¿Qué puedo recorrer?</button>
+     <button class="chip" data-answer="La ficha cultural reúne la información disponible y señala qué datos aún necesitan validación.">¿Cuál es su historia?</button>
+    </div>
+    <div class="chat-answer" id="chatAnswer" aria-live="polite">Selecciona una pregunta para ver un ejemplo de interacción.</div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="impacto">
+ <div class="container">
+  <div class="section-kicker">05 / El impacto que buscamos</div>
+  <h2 class="section-title">Que las historias<br>sigan circulando.</h2>
+  <p class="section-intro">El proyecto busca aportar a la relación entre las personas y su territorio. Su impacto se evaluará mediante pruebas con usuarios, participación cultural y calidad de la documentación.</p>
+  <div class="impact">
+   <article class="impact-item"><div class="impact-icon">♡</div><h3>Apropiación cultural</h3><p>Más conexión entre las personas y las expresiones de su entorno.</p></article>
+   <article class="impact-item"><div class="impact-icon">✺</div><h3>Visibilidad artística</h3><p>Reconocimiento de artistas, colectivos y autorías.</p></article>
+   <article class="impact-item"><div class="impact-icon">⌂</div><h3>Memoria urbana</h3><p>Documentación de obras, relatos y contextos.</p></article>
+   <article class="impact-item"><div class="impact-icon">↗</div><h3>Turismo cultural</h3><p>Recorridos con mayor profundidad y significado.</p></article>
+  </div>
+ </div>
+</section>
+
+<section class="final-cta">
+ <div class="container final-inner">
+  <div><h2>Explora. Descubre.<br>Conecta.</h2><p>La Candelaria tiene historias que merecen ser escuchadas.</p></div>
+  <a class="button" href="#inicio">Volver al inicio ↑</a>
+ </div>
+</section>
+</main>
+
+<footer>
+ <div class="container footer-inner">
+  <div><strong>LA CANDELARIA</strong><br><span class="small">Historias que viven en sus muros · Bogotá, Colombia</span></div>
+  <div class="small">Proyecto conceptual de innovación cultural y tecnológica.</div>
+ </div>
+</footer>
+
+<script>
+const toggle=document.getElementById('menuToggle');
+const nav=document.getElementById('navLinks');
+toggle.addEventListener('click',()=>{
+  const open=nav.classList.toggle('open');
+  toggle.setAttribute('aria-expanded',String(open));
+  toggle.textContent=open?'×':'☰';
+});
+nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+  nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰';
+}));
+document.querySelectorAll('.chip').forEach(button=>{
+  button.addEventListener('click',()=>{
+    document.getElementById('chatAnswer').textContent=button.dataset.answer;
+  });
+});
+</script>
+</body>
+</html>
